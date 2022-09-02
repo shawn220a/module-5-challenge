@@ -37,7 +37,9 @@ class Timeblock {
 
   showPastPresentFuture() {
     if (this.militaryTime < this.currentHour) {
-      return this.textareaEl.addClass('past');
+      return (
+        this.textareaEl.addClass('past') && this.saveBtnEl.addClass('disabled')
+      );
     }
     if (this.militaryTime === this.currentHour) {
       return this.textareaEl.addClass('present');
@@ -73,8 +75,10 @@ timeblocks.append(
 $('#currentDay').append(moment().format('MMMM Do, YYYY'));
 
 $('.saveBtn').on('click', function () {
-  let time = $(this).siblings().attr('id');
-  let newTime = time.replace('-', '');
-  let value = $(this).siblings('.description').val();
-  eval(newTime).saveToLocalStorage(time, value);
+  if ($(this).attr('class') === 'disabled') {
+    let time = $(this).siblings().attr('id');
+    let newTime = time.replace('-', '');
+    let value = $(this).siblings('.description').val();
+    eval(newTime).saveToLocalStorage(time, value);
+  }
 });
