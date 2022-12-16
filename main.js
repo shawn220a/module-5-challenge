@@ -27,7 +27,7 @@ timeblocks.append(
 $('#currentDay').append(moment().format('MMMM Do, YYYY'));
 
 $('.saveBtn').on('click', function () {
-  if ($(this).attr('class') !== 'disabled') {
+  if ($(this).attr('class').split(' ')[3] !== 'disabled') {
     let time = $(this).siblings().attr('id');
     let newTime = time.replace('-', '');
     let value = $(this).siblings('.description').val();
